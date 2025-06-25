@@ -2,6 +2,11 @@
 import { cn } from '@/lib/utils';
 import GradientBg from './GradientBg';
 import { GlobeDemo } from './GridGlobe';
+import Lottie from 'react-lottie';
+import { useState } from 'react';
+import animationData from '../../data/confetti.json';
+import MagicButton from './MagicButton';
+import { IoCopyOutline } from 'react-icons/io5';
 
 export const BentoGrid = ({ className, children }) => {
   return (
@@ -22,6 +27,11 @@ export const BentoGridItem = ({
   spareImg,
 }) => {
   console.log('dfgiloyfjkl', id);
+  const [copy, setCopy] = useState();
+  const handleCopy = () => {
+    navigator.clipboard.writeText('zain.ashiq613@gmail.com');
+    setCopy(true);
+  };
 
   return (
     <div
@@ -51,14 +61,14 @@ export const BentoGridItem = ({
         </div>
         {id === 6 && (
           <GradientBg>
-            <div className="absolute z-60 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl" />
+            <div className="absolute z-60 flex flex-col items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
           </GradientBg>
         )}
 
         <div
           className={`group-hover/bento:translate-x-2 transition duration-200 ${
             id === 2 || id == 3 ? 'absolute' : 'relative'
-          } md:h-full min-h-40 flex flex-col px-5 lg:p-10`}
+          } md:h-full ${id === 6 ? 'min-h-60' : 'min-h-40'} flex flex-col px-5 lg:p-10`}
         >
           <div className="font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-20">
             {description}
@@ -98,8 +108,24 @@ export const BentoGridItem = ({
           </div>
         )}
         {id == 6 && (
-          <div className="mt-5 relative">
-            <div className="absolute -bottom-5 right-0"></div>
+          <div className="mt-5 absolute top-[80px]">
+            <div className="absolute">
+              <Lottie
+                options={{
+                  loop: copy,
+                  autoplay: copy,
+                  animationData: animationData,
+                  rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+                }}
+              />
+            </div>
+            <MagicButton
+              title={copy ? 'Email Copied' : 'Copy My Email'}
+              icon={<IoCopyOutline />}
+              position={'left'}
+              otherClasses={'!bg-[#161a31]'}
+              handleClick={handleCopy}
+            />
           </div>
         )}
       </div>

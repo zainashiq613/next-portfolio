@@ -34,7 +34,7 @@ const GradientBg = ({ children, className, containerClassName, animate = true })
           'bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]'
         )}
       />
-      <div className={cn('relative z-10', className)}>{children}</div>
+      <div className={cn('relative', className)}>{children}</div>
     </div>
   );
 };
